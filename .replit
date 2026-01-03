@@ -1,4 +1,7 @@
 run = "npm start"
+
+[env]
+PUPPETEER_EXECUTABLE_PATH = "chromium"
 entrypoint = "index.js"
 
 [nix]

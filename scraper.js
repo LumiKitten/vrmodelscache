@@ -58,10 +58,14 @@ class Scraper {
 
             if (isReplit) {
                 options.args.push('--disable-gpu', '--disable-dev-shm-usage', '--no-zygote');
-                // On Replit with Nix, chromium is usually available in the path
-                options.executablePath = '/usr/bin/chromium-browser';
-                // Fallback attempt for Nix path if the above fails in some replit environments:
-                // options.executablePath = pkgs.chromium.outPath + '/bin/chromium';
+                // On Replit with Nix, chromium is available via the nix environment.
+                // We prefer letting the environment handle the path or specifying the likely Nix location.
+                if (fs.existsSync('/nix/store')) {
+                    // Try to find chromium in the path if not explicitly set
+                    options.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || 'chromium';
+                } else {
+                    options.executablePath = '/usr/bin/chromium-browser';
+                }
             }
 
             this.browser = await puppeteer.launch(options);
