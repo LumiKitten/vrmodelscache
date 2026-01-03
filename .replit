@@ -1,8 +1,8 @@
 run = "npm start"
+entrypoint = "index.js"
 
 [env]
 PUPPETEER_EXECUTABLE_PATH = "chromium"
-entrypoint = "index.js"
 
 [nix]
 channel = "stable-23_05"
