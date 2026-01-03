@@ -1,0 +1,11 @@
+run = "npm start"
+entrypoint = "index.js"
+
+[nix]
+channel = "stable-23_05"
+
+[packager]
+language = "nodejs"
+
+[interpreter]
+command = ["node"]
